@@ -1,5 +1,22 @@
-function Home() {
-    return  (
+import { useRef, useState } from 'react';
+
+export default function Home() {
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleMusic = () => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  return (
     <div style={{
       fontFamily: `'Brush Script MT', cursive`,
       background: 'linear-gradient(135deg, #ffe6f0, #ffccff)',
@@ -7,6 +24,12 @@ function Home() {
       display: 'flex',
       flexDirection: 'column'
     }}>
+      {/* Música */}
+      <audio ref={audioRef} loop>
+        <source src="public/Undertale OST_ 025 - Dating Start!.mp3" type="audio/mpeg" />
+        Seu navegador não suporta áudio.
+      </audio>
+
       {/* Cabeçalho */}
       <header style={{
         backgroundColor: '#ff99cc',
@@ -16,7 +39,7 @@ function Home() {
         fontSize: '2.5rem',
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
       }}>
-        Bem-vindo ao Jardim do Bernardo e Clara 💐
+        Bem-vindo ao Jardim do Oi 💐
       </header>
 
       {/* Conteúdo Principal */}
@@ -42,7 +65,7 @@ function Home() {
           boxShadow: '0 0 20px rgba(255, 153, 204, 0.7)',
           marginBottom: '30px'
         }}>
-          Oier 💖
+          oi 💖
         </h1>
 
         <p style={{
@@ -58,8 +81,9 @@ function Home() {
           Uma mensagem simples, com todo o charme que você merece. Vem se apaixonar por essa vibe romântica e brega!
         </p>
 
+        {/* Botão de Redirecionamento */}
         <button style={{
-          marginTop: '40px',
+          marginTop: '30px',
           backgroundColor: '#ff66b2',
           color: 'white',
           border: 'none',
@@ -70,11 +94,31 @@ function Home() {
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
           transition: 'background-color 0.3s'
         }}
-        onClick={() => window.location.href = 'https://www.omfgdogs.com/'}
+          onClick={() => window.location.href = 'https://www.omfgdogs.com/'}
           onMouseOver={(e) => e.target.style.backgroundColor = '#ff3385'}
           onMouseOut={(e) => e.target.style.backgroundColor = '#ff66b2'}
         >
-          Oier de novo amor 🌸
+          Quero dizer oi de volta! 🌸
+        </button>
+
+        {/* Botão de Música */}
+        <button style={{
+          marginTop: '20px',
+          backgroundColor: isPlaying ? '#ff3385' : '#ff66b2',
+          color: 'white',
+          border: 'none',
+          padding: '15px 30px',
+          fontSize: '1.5rem',
+          borderRadius: '30px',
+          cursor: 'pointer',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+          transition: 'background-color 0.3s'
+        }}
+          onClick={toggleMusic}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#ff3385'}
+          onMouseOut={(e) => e.target.style.backgroundColor = isPlaying ? '#ff3385' : '#ff66b2'}
+        >
+          {isPlaying ? 'Pausar música 🎵' : 'Tocar música 🎶'}
         </button>
       </main>
 
@@ -87,10 +131,8 @@ function Home() {
         fontSize: '1.2rem',
         boxShadow: '0 -4px 6px rgba(0, 0, 0, 0.1)'
       }}>
-        © 2025 Jardim do Bernardo 💐 - Todo o romantismo reservado
+        © 2025 Jardim do Oi 💐 - Todo o romantismo reservado
       </footer>
     </div>
   );
 }
-
-export default Home;
