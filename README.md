@@ -1,2 +1,2 @@
 # clone-tabnews
-programing from zero a project from a course.
+projeto do zero do curso.dev
